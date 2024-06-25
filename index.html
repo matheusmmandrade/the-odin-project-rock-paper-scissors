@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        function getHumanChoice() {
+            let humanChoice;
+            do {
+                humanChoice = prompt("Choose rock, paper, or scissors:").toLowerCase();
+            } while (humanChoice !== "rock" && humanChoice !== "paper" && humanChoice !== "scissors");
+            return humanChoice;
+        }
+
+        function getComputerChoice() {
+            const randomInt = getRandomInt(3);
+            if (randomInt == 0) {
+                return "rock";
+            } else if (randomInt == 1) {
+                return "paper";
+            } else {
+                return "scissors";
+            }
+        }
+
+        function playRound(humanChoice, computerChoice) {
+            if (humanChoice == "rock" && computerChoice == "paper") {
+                console.log("You lose this round! Paper beats Rock");
+                return 1;
+            } else if (humanChoice == "rock" && computerChoice == "scissors") {
+                console.log("You win this round! Rock beats Scissors");
+                return 0;
+            } else if (humanChoice == "scissors" && computerChoice == "rock") {
+                console.log("You lose this round! Rock beats Scissors");
+                return 1;
+            } else if (humanChoice == "scissors" && computerChoice == "paper") {
+                console.log("You win this round! Scissors beats Paper");
+                return 0;
+            } else if (humanChoice == "paper" && computerChoice == "scissors") {
+                console.log("You lose this round! Scissors beats Paper");
+                return 1;
+            } else if (humanChoice == "paper" && computerChoice == "rock") {
+                console.log("You win this round! Paper beats Rock");
+                return 0;
+            } else {
+                return -1;
+            }
+        }
+
+        function playGame() {
+            let computerScore = 0;
+            let humanScore = 0;
+            
+            for (let i = 0; i < 5; i++) {
+                let humanSelection = getHumanChoice();
+                let computerSelection = getComputerChoice();
+                let result = playRound(humanSelection, computerSelection);
+                
+                if (result == 1) {
+                    computerScore++;
+                } else if (result == 0) {
+                    humanScore++;
+                } else {
+                    console.log("Tied Round");
+                }
+            }
+            
+            console.log(`Final Score - Human: ${humanScore}, Computer: ${computerScore}`);
+            if (computerScore == humanScore) {
+                console.log("Tied Game!");
+            } else if (humanScore > computerScore) {
+                console.log("Human wins");
+            } else {
+                console.log("Computer Wins");
+            }
+        }
+
+        playGame();
+
+  
+
+
+    </script>
+    
+</body>
+</html>
